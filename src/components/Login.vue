@@ -14,11 +14,11 @@
       >
         <!-- 有户名输入框 -->
         <el-form-item prop="username">
-          <el-input v-model="ruleForm.username"></el-input>
+          <el-input v-model="ruleForm.username" prefix-icon="iconfont icon-user"></el-input>
         </el-form-item>
         <!-- 密码输入框 -->
         <el-form-item prop="password">
-          <el-input v-model="ruleForm.password"></el-input>
+          <el-input v-model="ruleForm.password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btn">
@@ -37,8 +37,8 @@ export default {
     return {
       //表单数据
       ruleForm: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: '123456',
       },
       //表单验证规则
       rules: {
@@ -58,11 +58,16 @@ export default {
       },
     }
   },
+  mounted() {
+    //监听回车登入
+    window.addEventListener('keydown', this.keyDown)
+  },
   methods: {
     //重置表单
     resetFields() {
       this.$refs.ruleForm.resetFields()
     },
+    //点击按钮登入功能
     login() {
       this.$refs.ruleForm.validate(async (vaild) => {
         //未通过验证
@@ -77,6 +82,13 @@ export default {
         this.$router.push('/home')
       })
     },
+    //回车登入功能
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        this.login()
+      }
+    }
   },
 }
 </script>
