@@ -6,7 +6,7 @@ import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://119.23.53.78:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 axios.interceptors.request.use(config => {
   //为请求头对象添加token验证的Authorization字段
   config.headers.Authorization = window.sessionStorage.getItem('token')
