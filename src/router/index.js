@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '.././components/Login.vue'
-import Home from '.././components/Home.vue'
-import Welcome from '.././components/Welcome.vue'
-import Users from '.././components/users/Users.vue'
-import Rights from '.././components/power/Rights.vue'
-import Roles from '.././components/power/Roles.vue'
+import Login from '../components/Login.vue'
+import Home from '../components/Home.vue'
+import Welcome from '../components/Welcome.vue'
+import Users from '../components/users/Users.vue'
+import Rights from '../components/power/Rights.vue'
+import Roles from '../components/power/Roles.vue'
+import Cate from '../components/goods/Cate.vue'
+
 
 Vue.use(VueRouter)
 
@@ -25,29 +27,33 @@ const routes = [{
     children: [{
       path: '/welcome',
       component: Welcome
-    },{
+    }, {
       path: '/users',
       component: Users
-    },{
+    }, {
       path: '/rights',
       component: Rights
-    },
-    {
-      path: '/Roles',
+    }, {
+      path: '/roles',
       component: Roles
+    }, {
+      path: '/categories',
+      component: Cate
     }]
   }
+
 ]
 
 const router = new VueRouter({
   routes
 })
-//导航守卫
+
+//路由导航守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') next()
-  const tokenStr = window.sessionStorage.getItem('token')
-  if (!tokenStr) next('/login')
-  next()
+  if (to.path === '/login') return next();
+  const tokenStr = window.sessionStorage.getItem('token');
+  if (!tokenStr) return next('/login')
+  next();
 })
 
 export default router
